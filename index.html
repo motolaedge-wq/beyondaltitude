@@ -13,6 +13,139 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
+    <script>
+        ```html
+<!-- Beyond Altitude: Supabase Customer Reviews -->
+<section id="customer-reviews" class="customer-reviews">
+  <h2>What Our Customers Say</h2>
+  <p class="reviews-subtitle">
+    Experiences shared by travellers exploring Ladakh with us.
+  </p>
+
+  <div id="reviews-container" class="reviews-grid">
+    <p>Loading customer reviews...</p>
+  </div>
+</section>
+
+<style>
+  .customer-reviews {
+    padding: 50px 20px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+
+  .customer-reviews h2 {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  .reviews-subtitle {
+    color: #777;
+    margin-bottom: 30px;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    max-width: 1100px;
+    margin: auto;
+  }
+
+  .review-card {
+    padding: 22px;
+    border-radius: 12px;
+    background: #f5f5f5;
+    text-align: left;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .review-card h3 {
+    margin: 0 0 10px;
+  }
+
+  .review-stars {
+    color: #e5a000;
+    margin-bottom: 12px;
+    letter-spacing: 2px;
+  }
+
+  .review-text {
+    line-height: 1.6;
+    color: #444;
+  }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+(async function () {
+  const SUPABASE_URL = "YOUR_SUPABASE_URL";
+  const SUPABASE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
+
+  const container = document.getElementById("reviews-container");
+
+  if (
+    SUPABASE_URL.includes("YOUR_SUPABASE_URL") ||
+    SUPABASE_KEY.includes("YOUR_SUPABASE_PUBLISHABLE_KEY")
+  ) {
+    container.textContent = "Supabase configuration is required.";
+    return;
+  }
+
+  const supabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  try {
+    const { data, error } = await supabase
+      .from("customer_reviews")
+      .select("name, rating, review")
+      .order("id", { ascending: false });
+
+    if (error) throw error;
+
+    container.replaceChildren();
+
+    if (!data || data.length === 0) {
+      container.textContent = "No customer reviews yet.";
+      return;
+    }
+
+    data.forEach((item) => {
+      const card = document.createElement("article");
+      card.className = "review-card";
+
+      const name = document.createElement("h3");
+      name.textContent = item.name || "Traveller";
+
+      const stars = document.createElement("div");
+      stars.className = "review-stars";
+
+      const rating = Math.max(
+        0,
+        Math.min(5, Number(item.rating) || 0)
+      );
+
+      stars.textContent = "★".repeat(rating) + "☆".repeat(5 - rating);
+
+      const review = document.createElement("p");
+      review.className = "review-text";
+      review.textContent = item.review || "";
+
+      card.append(name, stars, review);
+      container.appendChild(card);
+    });
+  } catch (error) {
+    console.error("Could not load customer reviews:", error);
+    container.textContent =
+      "Reviews could not be loaded. Please try again later.";
+  }
+})();
+</script>
+```
+    </script>
 </head>
 
 <body>
