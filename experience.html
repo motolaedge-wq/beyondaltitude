@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Share your travel experience with Beyond Altitude and help fellow travellers discover Ladakh.">
+  <title>Share Your Experience | Beyond Altitude</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f4ef;
+      color: #24332d;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #183d32;
+      color: white;
+      padding: 20px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      font-size: 23px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    header a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 55px 20px 35px;
+      background: linear-gradient(135deg, #e6e6d8, #f5f4ef);
+    }
+
+    .hero .eyebrow {
+      color: #a46d27;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 5vw, 46px);
+      margin: 12px 0;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: auto;
+      color: #5b665f;
+    }
+
+    main {
+      max-width: 760px;
+      margin: 35px auto 60px;
+      padding: 0 18px;
+    }
+
+    .review-card {
+      background: white;
+      padding: clamp(22px, 5vw, 38px);
+      border-radius: 18px;
+      box-shadow: 0 8px 30px #183d3210;
+      border: 1px solid #e4e5dc;
+    }
+
+    .review-card h2 {
+      margin-bottom: 6px;
+      font-size: 25px;
+    }
+
+    .intro {
+      color: #68736c;
+      margin-bottom: 25px;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid #d4d9d3;
+      border-radius: 9px;
+      background: #fff;
+      font: inherit;
+      color: #24332d;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: 2px solid #b6cdbd;
+      border-color: #47735d;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .stars {
+      display: flex;
+      gap: 8px;
+      margin: 4px 0;
+    }
+
+    .stars button {
+      border: 0;
+      background: transparent;
+      font-size: 35px;
+      color: #c9c9c0;
+      cursor: pointer;
+      padding: 0 2px;
+    }
+
+    .stars button.selected {
+      color: #d99b36;
+    }
+
+    .rating-help {
+      color: #68736c;
+      font-size: 13px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 15px;
+      border: 0;
+      border-radius: 9px;
+      background: #dca34c;
+      color: #20342b;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background: #c78d35;
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    #form-message {
+      margin-top: 15px;
+      font-size: 14px;
+      overflow-wrap: anywhere;
+    }
+
+    .published {
+      margin-top: 42px;
+    }
+
+    .published h2 {
+      text-align: center;
+      margin-bottom: 18px;
+    }
+
+    #reviews-container {
+      display: grid;
+      gap: 15px;
+    }
+
+    .published-review {
+      background: white;
+      padding: 22px;
+      border-radius: 12px;
+      border: 1px solid #e4e5dc;
+      overflow-wrap: anywhere;
+    }
+
+    .published-review h3 {
+      font-size: 17px;
+    }
+
+    .published-stars {
+      color: #c78d35;
+      letter-spacing: 2px;
+      margin: 4px 0 10px;
+    }
+
+    .review-date {
+      color: #788078;
+      font-size: 12px;
+      margin-top: 12px;
+    }
+
+    footer {
+      background: #183d32;
+      color: #e5ebe6;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 13px;
+    }
+
+    footer a {
+      color: #f2c578;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a class="brand" href="index.html">BEYOND ALTITUDE</a>
+    <a href="index.html">← Back to Home</a>
+  </header>
+
+  <section class="hero">
+    <p class="eyebrow">Your journey matters</p>
+    <h1>Share Your Experience</h1>
+    <p>
+      Every journey through Ladakh leaves a story.
+      Share yours and help other travellers plan their own adventure.
+    </p>
+  </section>
+
+  <main>
+    <section class="review-card">
+      <h2>Tell us about your journey</h2>
+      <p class="intro">
+        We'd love to hear about your experience with Beyond Altitude.
+      </p>
+
+      <form id="review-form">
+        <div class="field">
+          <label for="review-name">Your name</label>
+          <input id="review-name" name="name" type="text"
+            minlength="2" maxlength="80"
+            placeholder="Enter your name" autocomplete="name" required>
+        </div>
+
+        <div class="field">
+          <label>Your rating</label>
+          <div class="stars" id="star-picker" role="group"
+            aria-label="Choose a rating from one to five stars">
+            <button type="button" data-rating="1" aria-label="1 star">★</button>
+            <button type="button" data-rating="2" aria-label="2 stars">★</button>
+            <button type="button" data-rating="3" aria-label="3 stars">★</button>
+            <button type="button" data-rating="4" aria-label="4 stars">★</button>
+            <button type="button" data-rating="5" aria-label="5 stars">★</button>
+          </div>
+          <p class="rating-help" id="rating-help">Select your rating</p>
+          <input type="hidden" id="review-rating" value="">
+        </div>
+
+        <div class="field">
+          <label for="review-text">Your experience</label>
+          <textarea id="review-text" name="review"
+            minlength="10" maxlength="1000"
+            placeholder="What did you enjoy about your trip to Ladakh?"
+            required></textarea>
+        </div>
+
+        <button class="submit-btn" id="submit-btn" type="submit">
+          Submit Your Review
+        </button>
+
+        <p id="form-message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="published">
+      <h2>Experiences Shared by Travellers</h2>
+      <div id="reviews-container">
+        <p style="text-align:center;">Loading published reviews...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Beyond Altitude — Discover Ladakh, Your Way.</p>
+    <p style="margin-top:8px;">
+      <a href="index.html">Return to Beyond Altitude</a>
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    (function () {
+      const SUPABASE_URL = "https://gtiqyltzlcqzcpqnpsbb.supabase.co";
+      const SUPABASE_KEY = "sb_publishable_fwzYRS8chR8nN3A2C7h08g_XS5zmDw3";
+
+      const client = window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+      const form = document.getElementById("review-form");
+      const nameInput = document.getElementById("review-name");
+      const ratingInput = document.getElementById("review-rating");
+      const reviewInput = document.getElementById("review-text");
+      const message = document.getElementById("form-message");
+      const submitButton = document.getElementById("submit-btn");
+      const container = document.getElementById("reviews-container");
+      const ratingHelp = document.getElementById("rating-help");
+      const starButtons = document.querySelectorAll("#star-picker button");
+
+      let selectedRating = 0;
+
+      starButtons.forEach(button => {
+        button.addEventListener("click", () => {
+          selectedRating = Number(button.dataset.rating);
+          ratingInput.value = selectedRating;
+          ratingHelp.textContent = selectedRating + " out of 5 stars";
+
+          starButtons.forEach(star => {
+            const active = Number(star.dataset.rating) <= selectedRating;
+            star.classList.toggle("selected", active);
+            star.setAttribute("aria-pressed", String(
+              Number(star.dataset.rating) === selectedRating
+            ));
+          });
+        });
+      });
+
+      async function loadReviews() {
+        const { data, error } = await client
+          .from("customer_reviews")
+          .select("name, rating, review, created_at")
+          .eq("is_approved", true)
+          .order("created_at", { ascending: false });
+
+        if (error) {
+          console.error("Could not load reviews:", error);
+          container.textContent =
+            "Published reviews are temporarily unavailable.";
+          return;
+        }
+
+        container.replaceChildren();
+
+        if (!data || data.length === 0) {
+          container.textContent =
+            "No published reviews yet. Be the first to share your experience!";
+          return;
+        }
+
+        data.forEach(item => {
+          const card = document.createElement("article");
+          card.className = "published-review";
+
+          const heading = document.createElement("h3");
+          heading.textContent = item.name;
+
+          const stars = document.createElement("p");
+          stars.className = "published-stars";
+          stars.textContent =
+            "★".repeat(item.rating) + "☆".repeat(5 - item.rating);
+          stars.setAttribute("aria-label", item.rating + " out of 5 stars");
+
+          const reviewText = document.createElement("p");
+          reviewText.textContent = item.review;
+
+          const date = document.createElement("p");
+          date.className = "review-date";
+          date.textContent = new Date(item.created_at).toLocaleDateString();
+
+          card.append(heading, stars, reviewText, date);
+          container.appendChild(card);
+        });
+      }
+
+      form.addEventListener("submit", async event => {
+        event.preventDefault();
+
+        const name = nameInput.value.trim();
+        const review = reviewInput.value.trim();
+
+        if (name.length < 2 || review.length < 10 || selectedRating < 1) {
+          message.textContent =
+            "Please enter your name, select a star rating, and write at least 10 characters.";
+          return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+        message.textContent = "";
+
+        try {
+          const { error } = await client
+            .from("customer_reviews")
+            .insert([{
+              name: name,
+              rating: selectedRating,
+              review: review
+            }]);
+
+          if (error) throw error;
+
+          message.textContent =
+            "Thank you for sharing your experience! Your review has been submitted for approval.";
+
+          form.reset();
+          selectedRating = 0;
+          ratingInput.value = "";
+          ratingHelp.textContent = "Select your rating";
+
+          starButtons.forEach(star => {
+            star.classList.remove("selected");
+            star.setAttribute("aria-pressed", "false");
+          });
+        } catch (error) {
+          console.error("Review submission failed:", error);
+          message.textContent =
+            "We couldn't submit your review. Please try again later.";
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "Submit Your Review";
+        }
+      });
+
+      loadReviews();
+    })();
+  </script>
+</body>
+</html>
