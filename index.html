@@ -613,12 +613,24 @@
                             <input type="email" name="Email" required
                                    placeholder="you@example.com">
                         </label>
+                        <label>
+  Phone Number
+  <input
+    type="tel"
+    id="phone"
+    name="phone"
+    placeholder="Enter your phone number"
+    maxlength="15"
+    autocomplete="tel"
+    required
+  >
+</label>
                     </div>
 
                     <div class="form-row">
                         <label>
                             Preferred travel dates
-                            <input type="text" name="Travel dates" required
+                            <input type="date" name="Travel dates" required
                                    placeholder="e.g. June 2027">
                         </label>
 
@@ -642,10 +654,42 @@
                     </label>
 
                     <label>
-                        Approximate budget per person
-                        <input type="text" name="Budget" required
-                               placeholder="e.g. ₹25,000–₹40,000">
-                    </label>
+    Approximate budget per person
+    <select name="Budget" id="Budget" required>
+        <option value="" disabled selected>Select your budget</option>
+        <option value="Below ₹5,000">Below ₹5,000</option>
+        <option value="₹5,000–₹10,000">₹5,000–₹10,000</option>
+        <option value="₹10,000–₹20,000">₹10,000–₹20,000</option>
+        <option value="₹20,000–₹30,000">₹20,000–₹30,000</option>
+        <option value="₹30,000–₹40,000">₹30,000–₹40,000</option>
+        <option value="₹40,000–₹50,000">₹40,000–₹50,000</option>
+        <option value="₹50,000–₹1,00,000">₹50,000–₹1,00,000</option>
+        <option value="Above ₹1,00,000">Above ₹1,00,000</option>
+        <option value="Custom">Enter my own budget</option>
+    </select>
+</label>
+
+<label id="customBudgetLabel" hidden>
+    Enter your budget per person (₹)
+    <input type="number" name="CustomBudget" id="CustomBudget"
+           min="1" step="1" placeholder="Enter amount in ₹">
+</label>
+
+<script>
+    const budgetSelect = document.getElementById("Budget");
+    const customBudgetLabel = document.getElementById("customBudgetLabel");
+    const customBudgetInput = document.getElementById("CustomBudget");
+
+    budgetSelect.addEventListener("change", function () {
+        const isCustom = this.value === "Custom";
+        customBudgetLabel.hidden = !isCustom;
+        customBudgetInput.required = isCustom;
+
+        if (!isCustom) {
+            customBudgetInput.value = "";
+        }
+    });
+</script>
 
                     <button class="button button-dark" type="submit">
                         Prepare My Enquiry ↗
