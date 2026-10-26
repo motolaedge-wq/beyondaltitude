@@ -158,7 +158,99 @@
   gtag('config', 'G-R5M4C1W46J');
 </script>
 
-    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+    <script>
+  const supabaseClient = window.supabase.createClient(
+    "https://gtiqyltzlcqzcpqnpsbb.supabase.co",
+    "sb_publishable_fwzYRS8chR8nN3A2C7h08g_XS5zmDw3"
+  );
+
+  const enquiryForm = document.getElementById("enquiryForm");
+
+  if (enquiryForm) {
+    enquiryForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const submitButton = enquiryForm.querySelector(
+        'button[type="submit"], input[type="submit"]'
+      );
+
+      const originalText = submitButton
+        ? (submitButton.tagName === "INPUT"
+            ? submitButton.value
+            : submitButton.textContent)
+        : "";
+
+      if (submitButton) {
+        submitButton.disabled = true;
+
+        if (submitButton.tagName === "INPUT") {
+          submitButton.value = "Submitting...";
+        } else {
+          submitButton.textContent = "Submitting...";
+        }
+      }
+
+      try {
+        const formData = new FormData(enquiryForm);
+
+        const enquiry = {
+          name: formData.get("name")?.trim(),
+          email: formData.get("email")?.trim(),
+          phone: formData.get("phone")?.trim() || null,
+          travel_date: formData.get("travel_date") || null,
+          group_size: formData.get("group_size") || null,
+          interests: formData.get("interests") || null,
+          budget: formData.get("budget") || null,
+          message: formData.get("message")?.trim() || null
+        };
+
+        if (!enquiry.name || !enquiry.email) {
+          throw new Error("Please enter your name and email.");
+        }
+
+        const { error } = await supabaseClient
+          .from("enquiries")
+          .insert([enquiry]);
+
+        if (error) {
+          console.error("Supabase error:", error);
+          throw new Error("Your enquiry could not be saved. Please try again.");
+        }
+
+        alert(
+          "Thank you for choosing Beyond Altitude!\n\n" +
+          "Your enquiry has been submitted successfully. " +
+          "Our team will get in touch with you soon."
+        );
+
+        enquiryForm.reset();
+
+      } catch (error) {
+        console.error("Enquiry submission failed:", error);
+        alert(error.message || "Something went wrong. Please try again.");
+
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+
+          if (submitButton.tagName === "INPUT") {
+            submitButton.value = originalText;
+          } else {
+            submitButton.textContent = originalText;
+          }
+        }
+      }
+    });
+  } else {
+    console.error(
+      'Enquiry form not found. Make sure your form has id="enquiryForm".'
+    );
+  }
+</script>
+</body>
 </head>
 
 <body>
