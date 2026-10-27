@@ -162,10 +162,7 @@
 
 
     <script>
-  const supabaseClient = window.supabase.createClient(
-    "https://gtiqyltzlcqzcpqnpsbb.supabase.co",
-    "sb_publishable_fwzYRS8chR8nN3A2C7h08g_XS5zmDw3"
-  );
+ 
 
   const enquiryForm = document.getElementById("enquiryForm");
 
@@ -699,81 +696,191 @@
                 </div>
 
                 
-<div class="budget-section">
-    <label for="Budget" class="budget-title">
-        Approximate budget per person
-        <span class="budget-hint">Choose a range that suits your trip</span>
-    </label>
 
-    <select name="Budget" id="Budget" required>
-        <option value="" disabled selected>Select your budget</option>
-        <option value="Below ₹5,000">Below ₹5,000</option>
-        <option value="₹5,000–₹10,000">₹5,000–₹10,000</option>
-        <option value="₹10,000–₹20,000">₹10,000–₹20,000</option>
-        <option value="₹20,000–₹30,000">₹20,000–₹30,000</option>
-        <option value="₹30,000–₹40,000">₹30,000–₹40,000</option>
-        <option value="₹40,000–₹50,000">₹40,000–₹50,000</option>
-        <option value="₹50,000–₹1,00,000">₹50,000–₹1,00,000</option>
-        <option value="Above ₹1,00,000">Above ₹1,00,000</option>
-        <option value="Custom">Enter my own budget</option>
-    </select>
+<div class="contact-form-wrap">
+    <form id="enquiryForm" class="enquiry-form">
 
-    <div id="customBudgetWrap" hidden>
-        <label for="CustomBudget">
-            Your custom budget (₹)
-        </label>
-        <input
-            type="number"
-            name="CustomBudget"
-            id="CustomBudget"
-            min="1"
-            step="1"
-            placeholder="e.g. 75000"
-        >
-        <small>Enter your total estimated budget per person.</small>
-    </div>
+        <h3>Plan Your Ladakh Trip</h3>
+        <p class="form-intro">
+            Tell us about your plans. Our representative will contact you.
+        </p>
+
+        <div class="form-row">
+            <div class="form-field">
+                <label for="travellerName">Full Name *</label>
+                <input type="text" id="travellerName" name="name"
+                       placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-field">
+                <label for="travellerEmail">Email Address *</label>
+                <input type="email" id="travellerEmail" name="email"
+                       placeholder="you@example.com" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-field">
+                <label for="travellerPhone">Phone Number *</label>
+                <input type="tel" id="travellerPhone" name="phone"
+                       placeholder="Enter your phone number"
+                       pattern="[+0-9() \-]{7,20}" required>
+            </div>
+
+            <div class="form-field">
+                <label for="travelDate">Expected Travel Date</label>
+                <input type="date" id="travelDate" name="travel_date">
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-field">
+                <label for="groupSize">Number of Travellers *</label>
+                <select id="groupSize" name="group_size" required>
+                    <option value="" disabled selected>Select group size</option>
+                    <option value="1">Solo traveller</option>
+                    <option value="2">2 people</option>
+                    <option value="3-4">3–4 people</option>
+                    <option value="5-7">5–7 people</option>
+                    <option value="8+">8 or more people</option>
+                </select>
+            </div>
+
+            <div class="form-field">
+                <label for="interests">Your Interests</label>
+                <select id="interests" name="interests">
+                    <option value="">Choose your experience</option>
+                    <option value="Culture and monasteries">Culture and monasteries</option>
+                    <option value="Mountain adventures">Mountain adventures</option>
+                    <option value="Road trips and landscapes">Road trips and landscapes</option>
+                    <option value="Local food and homestays">Local food and homestays</option>
+                    <option value="Photography and nature">Photography and nature</option>
+                    <option value="A mix of everything">A mix of everything</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="budget-section">
+            <label for="Budget" class="budget-title">
+                Approximate Budget Per Person *
+                <span class="budget-hint">Choose a range that suits your trip</span>
+            </label>
+
+            <select name="budget" id="Budget" required>
+                <option value="" disabled selected>Select your budget</option>
+                <option value="Below ₹5,000">Below ₹5,000</option>
+                <option value="₹5,000–₹10,000">₹5,000–₹10,000</option>
+                <option value="₹10,000–₹20,000">₹10,000–₹20,000</option>
+                <option value="₹20,000–₹30,000">₹20,000–₹30,000</option>
+                <option value="₹30,000–₹40,000">₹30,000–₹40,000</option>
+                <option value="₹40,000–₹50,000">₹40,000–₹50,000</option>
+                <option value="₹50,000–₹1,00,000">₹50,000–₹1,00,000</option>
+                <option value="Above ₹1,00,000">Above ₹1,00,000</option>
+                <option value="Custom">Enter my own budget</option>
+            </select>
+
+            <div id="customBudgetWrap" hidden>
+                <label for="CustomBudget">Your Custom Budget (₹) *</label>
+                <input type="number" name="CustomBudget" id="CustomBudget"
+                       min="1" step="1" placeholder="e.g. 75000">
+                <small>Enter your estimated budget per person.</small>
+            </div>
+        </div>
+
+        <div class="form-field">
+            <label for="travellerMessage">Additional Message</label>
+            <textarea id="travellerMessage" name="message" rows="4"
+                      placeholder="Tell us about your plans or preferences..."></textarea>
+        </div>
+
+        <button type="submit" class="button button-gold" id="submitEnquiry">
+            Submit Your Enquiry ↗
+        </button>
+
+        <p class="form-note">
+            Submitting an enquiry does not confirm a booking.
+        </p>
+
+    </form>
 </div>
 
 <style>
-.budget-section {
-    margin: 22px 0;
+.contact-form-wrap {
+    width: 100%;
+    min-width: 0;
 }
 
-.budget-title {
+.enquiry-form {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.enquiry-form h3 {
+    margin: 0 0 8px;
+    font-size: 25px;
+}
+
+.enquiry-form .form-intro {
+    margin: 0 0 22px;
+    opacity: .8;
+}
+
+.enquiry-form .form-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.enquiry-form .form-field {
+    min-width: 0;
+    margin-bottom: 16px;
+}
+
+.enquiry-form label,
+.enquiry-form .budget-title {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-weight: 600;
 }
 
-.budget-hint {
+.enquiry-form input,
+.enquiry-form select,
+.enquiry-form textarea {
     display: block;
-    margin-top: 5px;
-    font-size: 13px;
-    font-weight: 400;
-    opacity: 0.7;
-}
-
-.budget-section select,
-.budget-section input {
-    display: block;
-    box-sizing: border-box;
     width: 100%;
     min-height: 48px;
-    margin-top: 8px;
+    box-sizing: border-box;
     padding: 12px 14px;
     border: 1px solid #d5dde2;
     border-radius: 10px;
     background: #fff;
-    color: #243746;
+    color: #142b3c;
     font: inherit;
-    transition: border-color .2s, box-shadow .2s;
 }
 
-.budget-section select:focus,
-.budget-section input:focus {
-    outline: none;
-    border-color: #247b83;
-    box-shadow: 0 0 0 3px rgba(36,123,131,.12);
+.enquiry-form textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.enquiry-form input:focus,
+.enquiry-form select:focus,
+.enquiry-form textarea:focus {
+    outline: 2px solid #247b83;
+    outline-offset: 2px;
+}
+
+.enquiry-form .budget-section {
+    margin: 22px 0;
+}
+
+.enquiry-form .budget-hint {
+    display: block;
+    margin-top: 5px;
+    font-size: 13px;
+    font-weight: 400;
+    opacity: .75;
 }
 
 #customBudgetWrap {
@@ -782,58 +889,44 @@
     border: 1px solid #dce8e8;
     border-radius: 12px;
     background: #f5f9f8;
-    animation: budgetAppear .2s ease-out;
 }
 
 #customBudgetWrap[hidden] {
     display: none;
 }
 
-#customBudgetWrap label {
-    font-weight: 600;
-}
-
 #customBudgetWrap small {
     display: block;
     margin-top: 8px;
     color: #607278;
-    font-size: 12px;
 }
 
-@keyframes budgetAppear {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
+.enquiry-form button[type="submit"] {
+    cursor: pointer;
+    border: 0;
+    font: inherit;
+}
+
+.enquiry-form button[type="submit"]:disabled {
+    opacity: .65;
+    cursor: wait;
+}
+
+.enquiry-form .form-note {
+    margin-top: 14px;
+    font-size: 13px;
+    line-height: 1.6;
+    opacity: .75;
+}
+
+@media (max-width: 600px) {
+    .enquiry-form .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
 }
 </style>
 
-<script>
-(function () {
-    const budget = document.getElementById("Budget");
-    const wrap = document.getElementById("customBudgetWrap");
-    const amount = document.getElementById("CustomBudget");
-
-    if (!budget || !wrap || !amount) return;
-
-    function updateBudget() {
-        const custom = budget.value === "Custom";
-        wrap.hidden = !custom;
-        amount.required = custom;
-
-        if (!custom) amount.value = "";
-    }
-
-    budget.addEventListener("change", updateBudget);
-    updateBudget();
-})();
-</script>
-
-                    <p class="form-note">
-                        This basic form opens your default email application.
-                        Replace the example email address with your real
-                        business email before publishing.
-                    </p>
-                </form>
-            </div>
         </section>
 
     </main>
@@ -864,6 +957,108 @@
             <span> designed & develop  by villayat khan</span>
         </div>
     </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("enquiryForm");
+    const budget = document.getElementById("Budget");
+    const customWrap = document.getElementById("customBudgetWrap");
+    const customAmount = document.getElementById("CustomBudget");
+    const submitButton = document.getElementById("submitEnquiry");
+
+    if (!form || !budget || !customWrap || !customAmount || !submitButton) {
+        console.error("Plan Your Trip form could not be found.");
+        return;
+    }
+
+    function updateCustomBudget() {
+        const isCustom = budget.value === "Custom";
+
+        customWrap.hidden = !isCustom;
+        customAmount.required = isCustom;
+
+        if (!isCustom) {
+            customAmount.value = "";
+        }
+    }
+
+    budget.addEventListener("change", updateCustomBudget);
+    updateCustomBudget();
+
+    form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        if (!form.reportValidity()) return;
+
+        const originalText = submitButton.textContent;
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Submitting...";
+
+        try {
+            if (!window.supabase) {
+                throw new Error("The submission service could not be loaded. Please try again.");
+            }
+
+            const data = new FormData(form);
+            let budgetValue = data.get("budget");
+
+            if (budgetValue === "Custom") {
+                const amount = Number(data.get("CustomBudget"));
+
+                if (!Number.isFinite(amount) || amount <= 0) {
+                    throw new Error("Please enter a valid custom budget.");
+                }
+
+                budgetValue = "Custom: ₹" + amount;
+            }
+
+            const supabaseClient = window.supabase.createClient(
+                "https://gtiqyltzlcqzcpqnpsbb.supabase.co",
+                "sb_publishable_fwzYRS8chR8nN3A2C7h08g_XS5zmDw3"
+            );
+
+            const enquiry = {
+                name: data.get("name").trim(),
+                email: data.get("email").trim(),
+                phone: data.get("phone").trim(),
+                travel_date: data.get("travel_date") || null,
+                group_size: data.get("group_size"),
+                interests: data.get("interests") || null,
+                budget: budgetValue,
+                message: data.get("message").trim() || null
+            };
+
+            const { error } = await supabaseClient
+                .from("enquiries")
+                .insert([enquiry]);
+
+            if (error) {
+                console.error("Supabase error:", error);
+                throw new Error(
+                    "Your enquiry could not be submitted. Please check your connection and try again."
+                );
+            }
+
+            // JavaScript alert: one OK button, no Cancel button.
+            alert("Thank you! Our representative will call you soon.");
+
+            // Refresh only after the visitor clicks OK.
+            window.location.reload();
+
+        } catch (error) {
+            console.error("Enquiry submission failed:", error);
+            alert(error.message || "Something went wrong. Please try again.");
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
+        }
+    });
+});
+</script>
+</body>
+</html>
 
 </body>
 </html>
