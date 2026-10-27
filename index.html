@@ -699,67 +699,12 @@
                 </div>
 
                 
-                      <form method='post'>
+<div class="budget-section">
+    <label for="Budget" class="budget-title">
+        Approximate budget per person
+        <span class="budget-hint">Choose a range that suits your trip</span>
+    </label>
 
-                    <div class="form-heading">
-                        <h3>Plan Your Trip</h3>
-                        <span>YOUR FIRST STEP</span>
-                    </div>
-
-                    <div class="form-row">
-                        <label>
-                            Your name
-                            <input type="text" name="Name" required
-                                   placeholder="Enter your name">
-                        </label>
-
-                        <label>
-                            Email address
-                            <input type="email" name="Email" required
-                                   placeholder="you@example.com">
-                        </label>
-                        <label>
-  Phone Number
-  <input
-    type="tel"
-    id="phone"
-    name="phone"
-    placeholder="Enter your phone number"
-    maxlength="15"
-    autocomplete="tel"
-    required
-  >
-</label>
-                    </div>
-
-                    <div class="form-row">
-                        <label>
-                            Preferred travel dates
-                            <input type="date" name="Travel dates" required
-                                   placeholder="e.g. June 2027">
-                        </label>
-
-                        <label>
-                            Who's travelling?
-                            <select name="Group type" required>
-                                <option value="">Choose a group</option>
-                                <option>Solo traveller</option>
-                                <option>Couple</option>
-                                <option>Friends</option>
-                                <option>Family</option>
-                                <option>Other</option>
-                            </select>
-                        </label>
-                    </div>
-
-                    <label>
-                        What would make this trip special?
-                        <textarea name="Interests" rows="3" required
-                                  placeholder="Culture, mountain roads, homestays, adventure..."></textarea>
-                    </label>
-
-                    <label>
-    Approximate budget per person
     <select name="Budget" id="Budget" required>
         <option value="" disabled selected>Select your budget</option>
         <option value="Below ₹5,000">Below ₹5,000</option>
@@ -772,45 +717,115 @@
         <option value="Above ₹1,00,000">Above ₹1,00,000</option>
         <option value="Custom">Enter my own budget</option>
     </select>
-</label>
 
+    <div id="customBudgetWrap" hidden>
+        <label for="CustomBudget">
+            Your custom budget (₹)
+        </label>
+        <input
+            type="number"
+            name="CustomBudget"
+            id="CustomBudget"
+            min="1"
+            step="1"
+            placeholder="e.g. 75000"
+        >
+        <small>Enter your total estimated budget per person.</small>
+    </div>
+</div>
 
-<label id="customBudgetLabel" hidden>
-    Enter your budget per person (₹)
-    <input type="number" name="CustomBudget" id="CustomBudget"
-           min="1" step="1" placeholder="Enter amount in ₹">
-</label>
+<style>
+.budget-section {
+    margin: 22px 0;
+}
+
+.budget-title {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.budget-hint {
+    display: block;
+    margin-top: 5px;
+    font-size: 13px;
+    font-weight: 400;
+    opacity: 0.7;
+}
+
+.budget-section select,
+.budget-section input {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 48px;
+    margin-top: 8px;
+    padding: 12px 14px;
+    border: 1px solid #d5dde2;
+    border-radius: 10px;
+    background: #fff;
+    color: #243746;
+    font: inherit;
+    transition: border-color .2s, box-shadow .2s;
+}
+
+.budget-section select:focus,
+.budget-section input:focus {
+    outline: none;
+    border-color: #247b83;
+    box-shadow: 0 0 0 3px rgba(36,123,131,.12);
+}
+
+#customBudgetWrap {
+    margin-top: 16px;
+    padding: 16px;
+    border: 1px solid #dce8e8;
+    border-radius: 12px;
+    background: #f5f9f8;
+    animation: budgetAppear .2s ease-out;
+}
+
+#customBudgetWrap[hidden] {
+    display: none;
+}
+
+#customBudgetWrap label {
+    font-weight: 600;
+}
+
+#customBudgetWrap small {
+    display: block;
+    margin-top: 8px;
+    color: #607278;
+    font-size: 12px;
+}
+
+@keyframes budgetAppear {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+</style>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const budgetSelect = document.getElementById("Budget");
-    const customBudgetLabel = document.getElementById("customBudgetLabel");
-    const customBudgetInput = document.getElementById("CustomBudget");
+(function () {
+    const budget = document.getElementById("Budget");
+    const wrap = document.getElementById("customBudgetWrap");
+    const amount = document.getElementById("CustomBudget");
 
-    if (!budgetSelect || !customBudgetLabel || !customBudgetInput) {
-        console.error("Budget dropdown or custom budget input not found.");
-        return;
-    }
+    if (!budget || !wrap || !amount) return;
 
     function updateBudget() {
-        const isCustom = budgetSelect.value.trim() === "Custom";
+        const custom = budget.value === "Custom";
+        wrap.hidden = !custom;
+        amount.required = custom;
 
-        customBudgetLabel.hidden = !isCustom;
-        customBudgetInput.required = isCustom;
-
-        if (!isCustom) {
-            customBudgetInput.value = "";
-        }
+        if (!custom) amount.value = "";
     }
 
-    budgetSelect.addEventListener("change", updateBudget);
+    budget.addEventListener("change", updateBudget);
     updateBudget();
-});
+})();
 </script>
-
-                    <button class="button button-dark" type="submit">
-                        Prepare My Enquiry ↗
-                    </button>
 
                     <p class="form-note">
                         This basic form opens your default email application.
