@@ -774,6 +774,7 @@
     </select>
 </label>
 
+
 <label id="customBudgetLabel" hidden>
     Enter your budget per person (₹)
     <input type="number" name="CustomBudget" id="CustomBudget"
@@ -781,19 +782,30 @@
 </label>
 
 <script>
+document.addEventListener("DOMContentLoaded", function () {
     const budgetSelect = document.getElementById("Budget");
     const customBudgetLabel = document.getElementById("customBudgetLabel");
     const customBudgetInput = document.getElementById("CustomBudget");
 
-    budgetSelect.addEventListener("change", function () {
-        const isCustom = this.value === "Custom";
+    if (!budgetSelect || !customBudgetLabel || !customBudgetInput) {
+        console.error("Budget dropdown or custom budget input not found.");
+        return;
+    }
+
+    function updateBudget() {
+        const isCustom = budgetSelect.value.trim() === "Custom";
+
         customBudgetLabel.hidden = !isCustom;
         customBudgetInput.required = isCustom;
 
         if (!isCustom) {
             customBudgetInput.value = "";
         }
-    });
+    }
+
+    budgetSelect.addEventListener("change", updateBudget);
+    updateBudget();
+});
 </script>
 
                     <button class="button button-dark" type="submit">
