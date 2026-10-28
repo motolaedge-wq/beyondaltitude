@@ -1442,7 +1442,7 @@ p {
         align-items: flex-start;
         flex-direction: column;
         gap: 10px;
-        font-size: 20px;
+        font-size: 50px;
     }
 }
 
