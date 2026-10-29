@@ -1,0 +1,590 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beyond Altitude | Build Your Own Tour</title>
+
+<style>
+:root {
+    --dark: #17352f;
+    --green: #397565;
+    --gold: #d8b475;
+    --bg: #f5f5ef;
+    --text: #26342f;
+    --muted: #707b75;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(135deg, #17352f, #315b4e);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.brand {
+    color: var(--gold);
+    letter-spacing: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+header h1 {
+    font-size: clamp(32px, 6vw, 52px);
+}
+
+header p {
+    color: #e5eee9;
+    margin-top: 12px;
+}
+
+.container {
+    width: min(1000px, 92%);
+    margin: 30px auto 55px;
+}
+
+.back-link {
+    display: inline-block;
+    color: var(--dark);
+    text-decoration: none;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #dce3dc;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px #17352f12;
+}
+
+.hero {
+    background: linear-gradient(120deg, var(--dark), var(--green));
+    padding: 30px;
+    color: white;
+}
+
+.hero small {
+    color: var(--gold);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.hero h2 {
+    font-size: clamp(25px, 4vw, 36px);
+    margin: 10px 0;
+}
+
+.hero p {
+    color: #e5eee9;
+}
+
+.form-content {
+    padding: clamp(18px, 4vw, 32px);
+}
+
+.section-title {
+    color: var(--dark);
+    margin-bottom: 5px;
+    font-size: 21px;
+}
+
+.help {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+.region {
+    margin-top: 25px;
+}
+
+.region h3 {
+    color: var(--dark);
+    margin-bottom: 12px;
+    font-size: 17px;
+}
+
+.destinations {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.destination {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 14px;
+    border: 1px solid #dfe5de;
+    border-radius: 10px;
+    background: #fafbf8;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.destination:has(input:checked) {
+    background: #edf5ef;
+    border-color: var(--green);
+}
+
+.destination input {
+    margin-top: 5px;
+    accent-color: var(--green);
+}
+
+.destination strong {
+    display: block;
+    color: var(--dark);
+    font-size: 13px;
+}
+
+.destination span {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.count {
+    display: inline-block;
+    margin-top: 12px;
+    background: #edf4ed;
+    color: var(--dark);
+    padding: 6px 12px;
+    border-radius: 7px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.custom-place {
+    margin-top: 25px;
+    padding: 18px;
+    border: 1px dashed #bdcfc0;
+    border-radius: 10px;
+    background: #fafbf8;
+}
+
+.fields {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 17px;
+    margin-top: 28px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="date"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccd6ce;
+    border-radius: 7px;
+    background: white;
+    color: var(--text);
+    font: inherit;
+    font-size: 14px;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 2px solid #a4c5b7;
+}
+
+.notice {
+    margin-top: 22px;
+    padding: 14px;
+    background: #fff8e9;
+    border: 1px solid #efdfb8;
+    border-radius: 8px;
+    color: #6c542b;
+    font-size: 12px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 22px;
+}
+
+button {
+    border: none;
+    border-radius: 7px;
+    padding: 13px 20px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.primary {
+    background: var(--green);
+    color: white;
+}
+
+.secondary {
+    background: #e8ede7;
+    color: var(--dark);
+}
+
+button:hover {
+    opacity: .9;
+}
+
+#result {
+    display: none;
+    margin-top: 20px;
+    padding: 16px;
+    border: 1px solid #d7dfd7;
+    border-radius: 8px;
+    background: #f5f8f3;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 25px;
+    font-size: 13px;
+}
+
+footer strong {
+    color: var(--gold);
+    letter-spacing: 3px;
+}
+
+@media (max-width: 750px) {
+    .destinations {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 520px) {
+    .destinations,
+    .fields {
+        grid-template-columns: 1fr;
+    }
+
+    .full {
+        grid-column: auto;
+    }
+
+    .buttons button {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="brand">BEYOND ALTITUDE</div>
+    <h1>Build Your Own Tour</h1>
+    <p>Choose your destinations. Create your own Ladakh journey.</p>
+</header>
+
+<main class="container">
+
+    <a class="back-link" href="index.html">
+        ← Back to all packages
+    </a>
+
+    <article class="card">
+
+        <div class="hero">
+            <small>PACKAGE 04 · FULLY FLEXIBLE</small>
+            <h2>Create Your Own Ladakh Journey</h2>
+            <p>
+                Choose one destination or combine several.
+                Tell us your preferences and we'll help plan your trip.
+            </p>
+        </div>
+
+        <form class="form-content" id="tourForm">
+
+            <h2 class="section-title">Choose Your Destinations</h2>
+            <p class="help">Select all the places you want to explore.</p>
+
+            <div class="region">
+                <h3>Leh & Eastern Ladakh</h3>
+
+                <div class="destinations">
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Leh Town">
+                        <div><strong>Leh Town</strong><span>Markets and landmarks</span></div>
+                    </label>
+
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Sham Valley">
+                        <div><strong>Sham Valley</strong><span>Scenic drives and villages</span></div>
+                    </label>
+
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Ladakh Monasteries">
+                        <div><strong>Monasteries</strong><span>Thiksey, Hemis and more</span></div>
+                    </label>
+
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Nubra Valley">
+                        <div><strong>Nubra Valley</strong><span>Valleys and sand dunes</span></div>
+                    </label>
+
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Pangong Lake">
+                        <div><strong>Pangong Lake</strong><span>High-altitude lake views</span></div>
+                    </label>
+
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Turtuk Village">
+                        <div><strong>Turtuk Village</strong><span>Heritage and village life</span></div>
+                    </label>
+
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Khardung La">
+                        <div><strong>Khardung La</strong><span>Mountain pass</span></div>
+                    </label>
+
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Hanle">
+                        <div><strong>Hanle</strong><span>Remote landscapes and stars</span></div>
+                    </label>
+
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Tso Moriri">
+                        <div><strong>Tso Moriri</strong><span>Lake and mountain scenery</span></div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="region">
+                <h3>Kargil & Western Ladakh</h3>
+
+                <div class="destinations">
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Kargil Town">
+                        <div><strong>Kargil Town</strong><span>Local culture</span></div>
+                    </label>
+
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Dras">
+                        <div><strong>Dras</strong><span>Mountain scenery</span></div>
+                    </label>
+
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Kargil War Memorial">
+                        <div><strong>Kargil War Memorial</strong><span>History and remembrance</span></div>
+                    </label>
+
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Mulbekh">
+                        <div><strong>Mulbekh</strong><span>Historic rock sculpture</span></div>
+                    </label>
+
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Suru Valley">
+                        <div><strong>Suru Valley</strong><span>Green valleys and mountains</span></div>
+                    </label>
+
+                    <label class="destination">
+                        <input type="checkbox" name="destination" value="Zanskar Valley">
+                        <div><strong>Zanskar Valley</strong><span>Remote landscapes and culture</span></div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="count">
+                <span id="count">0</span> destinations selected
+            </div>
+
+            <div class="custom-place">
+                <label for="customDestination">Another destination in Ladakh?</label>
+                <p class="help">Optional — add any other Ladakh place you would like to visit.</p>
+                <textarea id="customDestination" placeholder="Enter another destination..."></textarea>
+            </div>
+
+            <div class="fields">
+
+                <div class="field">
+                    <label for="name">Full Name *</label>
+                    <input id="name" type="text" required placeholder="Your full name">
+                </div>
+
+                <div class="field">
+                    <label for="phone">Contact Number *</label>
+                    <input id="phone" type="tel" required placeholder="Your phone number">
+                </div>
+
+                <div class="field">
+                    <label for="days">Trip Duration (days) *</label>
+                    <input id="days" type="number" min="1" max="60" value="5" required>
+                </div>
+
+                <div class="field">
+                    <label for="travellers">Number of Travellers *</label>
+                    <input id="travellers" type="number" min="1" max="100" value="2" required>
+                </div>
+
+                <div class="field">
+                    <label for="date">Preferred Start Date</label>
+                    <input id="date" type="date">
+                </div>
+
+                <div class="field">
+                    <label for="budget">Budget Per Person</label>
+                    <select id="budget">
+                        <option>Budget-friendly</option>
+                        <option selected>Moderate</option>
+                        <option>Comfort</option>
+                        <option>Premium</option>
+                        <option>Need guidance</option>
+                    </select>
+                </div>
+
+                <div class="field full">
+                    <label for="notes">Special Requests</label>
+                    <textarea id="notes" placeholder="Transport, hotels, food, sightseeing or other preferences..."></textarea>
+                </div>
+
+            </div>
+
+            <div class="notice">
+                <strong>Important:</strong> Your request is not a confirmed booking.
+                Final routes, permits, road conditions, availability and prices
+                must be confirmed before your trip.
+            </div>
+
+            <div class="buttons">
+                <button type="submit" class="primary">Create My Tour Request</button>
+                <button type="button" class="secondary" id="copyButton">Copy Request</button>
+            </div>
+
+            <div id="result" role="status" aria-live="polite"></div>
+
+        </form>
+    </article>
+</main>
+
+<footer>
+    <strong>BEYOND ALTITUDE</strong>
+    <p>Explore More. Experience Deeper. Travel Your Way.</p>
+</footer>
+
+<script>
+const form = document.getElementById("tourForm");
+const result = document.getElementById("result");
+
+function getDestinations() {
+    return [...document.querySelectorAll(
+        'input[name="destination"]:checked'
+    )].map(item => item.value);
+}
+
+function updateCount() {
+    document.getElementById("count").textContent =
+        getDestinations().length;
+}
+
+document.querySelectorAll('input[name="destination"]')
+    .forEach(item => item.addEventListener("change", updateCount));
+
+function createRequest() {
+    const destinations = getDestinations();
+    const custom = document.getElementById("customDestination").value.trim();
+
+    if (custom) {
+        destinations.push("Other destination: " + custom);
+    }
+
+    return [
+        "BEYOND ALTITUDE — CUSTOM TOUR REQUEST",
+        "",
+        "Name: " + document.getElementById("name").value.trim(),
+        "Contact: " + document.getElementById("phone").value.trim(),
+        "Destinations: " + destinations.join(", "),
+        "Duration: " + document.getElementById("days").value + " days",
+        "Travellers: " + document.getElementById("travellers").value,
+        "Start date: " + (document.getElementById("date").value || "Not specified"),
+        "Budget per person: " + document.getElementById("budget").value,
+        "Special requests: " + (document.getElementById("notes").value.trim() || "None"),
+        "",
+        "Please prepare a suitable Ladakh itinerary and confirm the price."
+    ].join("\n");
+}
+
+async function handleRequest() {
+    if (!form.reportValidity()) return;
+
+    if (
+        getDestinations().length === 0 &&
+        !document.getElementById("customDestination").value.trim()
+    ) {
+        alert("Please select at least one destination or enter another Ladakh destination.");
+        return;
+    }
+
+    const request = createRequest();
+
+    result.style.display = "block";
+    result.textContent = request;
+
+    try {
+        await navigator.clipboard.writeText(request);
+        alert("Your tour request is ready and has been copied. You can paste it into a message.");
+    } catch (error) {
+        alert("Your request is displayed below. Please copy it manually.");
+    }
+}
+
+form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    handleRequest();
+});
+
+document.getElementById("copyButton")
+    .addEventListener("click", handleRequest);
+</script>
+
+</body>
+</html>
